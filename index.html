@@ -173,6 +173,8 @@
     padding:14px 18px;
     color:var(--ink-soft);
     display:inline-block;
+    max-width:100%;
+    box-sizing:border-box;
     margin-bottom:24px;
   }
   .meta-block .key{color:var(--amber);}
@@ -331,6 +333,8 @@
   .modal-close:hover{background:var(--teal);}
   @media (max-width:560px){
     .case{padding:32px 22px;}
+    .meta-block{display:block;}
+    .meta-block .row{white-space:normal; word-break:break-word;}
   }
 
   .tools-row{
