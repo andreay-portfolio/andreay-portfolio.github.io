@@ -291,7 +291,16 @@
     color:var(--ink-soft);
     margin-top:10px;
   }
-  .tools-row .key{color:var(--teal);}
+  .tools-row .key{
+    color:var(--teal);
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .tools-row .arrow{
+    display:inline-block;
+    transform:translateY(-1px);
+  }
 
   /* ---------- Footer / Contact ---------- */
   footer{
@@ -393,7 +402,7 @@
         </figure>
       </div>
 
-      <div class="tools-row"><span class="key">tools →</span> MJML · Beefree · Microsoft Dynamics · HTML/CSS email</div>
+      <div class="tools-row"><span class="key">tools <span class="arrow">→</span></span> MJML · Beefree · Microsoft Dynamics · HTML/CSS email</div>
     </section>
 
     <!-- CASE STUDY 2: GA4 / ATTRIBUTION -->
@@ -427,7 +436,7 @@
         <div class="plus">treated as a strong directional signal, not a perfectly complete count — and said so, rather than overstating precision</div>
       </div>
 
-      <div class="tools-row"><span class="key">tools →</span> GA4 · Google Tag Manager · Looker Studio · UTM parameters</div>
+      <div class="tools-row"><span class="key">tools <span class="arrow">→</span></span> GA4 · Google Tag Manager · Looker Studio · UTM parameters</div>
     </section>
 
     <!-- CASE STUDY 3: SEGMENTATION / JOURNEY -->
@@ -463,7 +472,7 @@
         that still muddies a clean before/after read.
       </div>
 
-      <div class="tools-row"><span class="key">tools →</span> Microsoft Dynamics · Email · SMS · Looker Studio</div>
+      <div class="tools-row"><span class="key">tools <span class="arrow">→</span></span> Microsoft Dynamics · Email · SMS · Looker Studio</div>
     </section>
 
   </div>
