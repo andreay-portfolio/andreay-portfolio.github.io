@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Y — CRM, Email & Lifecycle Marketing</title>
+<meta name="description" content="CRM, email development, and marketing analytics specialist. Available for part-time and contract work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12172B;
+    --ink-soft:#3C4356;
+    --paper:#EEF1EF;
+    --paper-raised:#FFFFFF;
+    --line:#D7DCD8;
+    --teal:#256B69;
+    --teal-soft:#E4EFEE;
+    --amber:#B9791B;
+    --diff-minus:#FF8B7E;
+    --diff-plus:#7FE3AC;
+    --diff-bg:#1C2338;
+    --diff-fg:#F3F5F1;
+    --radius:10px;
+    --maxw:760px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--teal);}
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    line-height:1.15;
+    margin:0 0 0.5em 0;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Header / Hero ---------- */
+  header.hero{
+    padding:88px 0 64px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    color:var(--teal);
+    text-transform:lowercase;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--teal);
+    display:inline-block;
+  }
+  h1.hero-title{
+    font-size:clamp(30px, 4.4vw, 44px);
+    max-width:14ch;
+  }
+  .hero-sub{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin-top:16px;
+  }
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:28px;
+  }
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:var(--ink-soft);
+    background:var(--paper-raised);
+  }
+
+  /* ---------- Case study sections ---------- */
+  .cases-intro{
+    padding:64px 0 8px 0;
+  }
+  .cases-intro .eyebrow{margin-bottom:14px;}
+  .cases-intro h2{
+    font-size:clamp(20px, 2.6vw, 26px);
+    max-width:26ch;
+  }
+  .cases-intro p{
+    color:var(--ink-soft);
+    max-width:52ch;
+    font-size:16px;
+    margin-top:10px;
+  }
+
+  .cases{
+    padding:32px 0 40px 0;
+  }
+  .case{
+    padding:44px 40px;
+    margin-bottom:32px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:0 1px 0 rgba(18,23,43,0.03);
+  }
+  .case:last-child{margin-bottom:0;}
+  .case-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--amber);
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .case-num::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .meta-block{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    line-height:1.9;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 18px;
+    color:var(--ink-soft);
+    display:inline-block;
+    margin-bottom:24px;
+  }
+  .meta-block .key{color:var(--amber);}
+  .meta-block .row{white-space:nowrap;}
+
+  .case h2{
+    font-size:clamp(22px, 3vw, 28px);
+    max-width:20ch;
+  }
+  .case .lede{
+    color:var(--ink-soft);
+    font-size:16.5px;
+    max-width:60ch;
+    margin:14px 0 26px 0;
+  }
+
+  .case ul{
+    padding-left:0;
+    list-style:none;
+    margin:0 0 26px 0;
+  }
+  .case ul li{
+    position:relative;
+    padding-left:22px;
+    margin-bottom:12px;
+    max-width:58ch;
+  }
+  .case ul li::before{
+    content:"→";
+    position:absolute;
+    left:0;
+    color:var(--teal);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .case ul li strong{font-family:'Space Grotesk', sans-serif; font-weight:600;}
+
+  /* Diff-style trade-off callout */
+  .diff{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    line-height:2;
+    background:var(--diff-bg);
+    color:var(--diff-fg);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    margin:26px 0;
+    overflow-x:auto;
+  }
+  .diff .label{
+    color:#B7BEDA;
+    font-size:11.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:block;
+  }
+  .diff .minus{color:var(--diff-minus); font-weight:500;}
+  .diff .plus{color:var(--diff-plus); font-weight:500;}
+  .diff .minus::before{content:"- "; }
+  .diff .plus::before{content:"+ "; }
+
+  .note{
+    font-size:15px;
+    color:var(--ink-soft);
+    border-left:2px solid var(--line);
+    padding-left:16px;
+    margin:26px 0;
+    max-width:56ch;
+  }
+  .note .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--amber);
+    display:block;
+    margin-bottom:6px;
+  }
+
+  .shots{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin:26px 0;
+  }
+  .shots figure{
+    margin:0;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--paper-raised);
+  }
+  .shots img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .shots figcaption{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    padding:8px 12px;
+    border-top:1px solid var(--line);
+  }
+  @media (max-width:560px){
+    .shots{grid-template-columns:1fr;}
+    .case{padding:32px 22px;}
+  }
+
+  .tools-row{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+  .tools-row .key{color:var(--teal);}
+
+  /* ---------- Footer / Contact ---------- */
+  footer{
+    padding:64px 0 88px 0;
+  }
+  footer h2{font-size:24px;}
+  footer p{color:var(--ink-soft); max-width:52ch;}
+  .contact-btn{
+    display:inline-block;
+    margin-top:18px;
+    padding:12px 22px;
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    border-radius:999px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size:15px;
+  }
+  .contact-btn:hover{background:var(--teal);}
+
+  .colophon{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:40px;
+    opacity:0.7;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">available · part-time / contract</div>
+    <h1 class="hero-title">Most marketing wins are guesses. I build the systems that prove which ones are real.</h1>
+    <p class="hero-sub">
+      Andrea Y — CRM, lifecycle email, and marketing analytics. I design the
+      tracking, segmentation, and email systems that turn "I think this worked"
+      into an actual, defensible number.
+    </p>
+    <div class="chip-row">
+      <span class="chip">email development</span>
+      <span class="chip">marketing analytics</span>
+      <span class="chip">lifecycle segmentation</span>
+    </div>
+  </div>
+</header>
+
+<div class="cases-intro">
+  <div class="wrap">
+    <div class="eyebrow">selected work</div>
+    <h2>Three ways I make marketing claims provable</h2>
+    <p>Each project below started with a claim nobody could actually verify — and ended with a system that could.</p>
+  </div>
+</div>
+
+<main class="cases">
+  <div class="wrap">
+
+    <!-- CASE STUDY 1: EMAIL -->
+    <section class="case">
+      <div class="case-num">case study 01 / 03</div>
+      <div class="meta-block">
+        <div class="row"><span class="key">role</span>&nbsp;&nbsp;email development</div>
+        <div class="row"><span class="key">stack</span>&nbsp;mjml · beefree · dynamics · html/css</div>
+        <div class="row"><span class="key">result</span>&nbsp;days → minutes turnaround</div>
+      </div>
+
+      <h2>From static images to a self-serve email system</h2>
+      <p class="lede">
+        Every email was a flat image. A typo meant a new design request. Localising
+        a campaign took weeks. Led the shift to a coded, modular MJML template
+        system built to survive Outlook, Gmail, and dark mode — not just look
+        good on the designer's screen.
+      </p>
+
+      <ul>
+        <li><strong>Turnaround dropped from days to minutes</strong> — localised versions from weeks to minutes.</li>
+        <li><strong>Removed the designer bottleneck</strong> for most sends; one set of core assets could generate 40+ campaign variations without further design input.</li>
+        <li><strong>Doubled recommended products</strong> in transactional emails via a custom two-column block, at zero extra length.</li>
+        <li><strong>Fixed mobile rendering, accessibility, and cross-client bugs</strong> — including a shared component that let the same template run on both the core ESP and Microsoft Dynamics.</li>
+      </ul>
+
+      <div class="diff">
+        <span class="label">judgment call · outlook button padding</span>
+        <div class="minus">outlook's rendering engine won't respect button padding — text sits flush against the top edge</div>
+        <div class="plus">accepted the minor visual gap rather than ship fragile, hard-to-maintain conditional code for a cosmetic fix</div>
+      </div>
+
+      <div class="shots">
+        <figure>
+          <img src="images/Image-only_example.png" alt="Before: image-only email template" loading="lazy">
+          <figcaption>before — image-only</figcaption>
+        </figure>
+        <figure>
+          <img src="images/Custom-coded_html_example.png" alt="After: MJML-coded email template" loading="lazy">
+          <figcaption>after — mjml-coded</figcaption>
+        </figure>
+      </div>
+
+      <div class="tools-row"><span class="key">tools →</span> MJML · Beefree · Microsoft Dynamics · HTML/CSS email</div>
+    </section>
+
+    <!-- CASE STUDY 2: GA4 / ATTRIBUTION -->
+    <section class="case">
+      <div class="case-num">case study 02 / 03</div>
+      <div class="meta-block">
+        <div class="row"><span class="key">role</span>&nbsp;&nbsp;analytics &amp; attribution</div>
+        <div class="row"><span class="key">stack</span>&nbsp;ga4 · gtm · looker studio · utm</div>
+        <div class="row"><span class="key">scope</span>&nbsp;20-clinic network</div>
+      </div>
+
+      <h2>Replacing a misleading percentage with real numbers</h2>
+      <p class="lede">
+        After an acquisition, marketing "success" was judged by a patchwork of
+        conflicting signals — a booking-split percentage that hid seasonal
+        swings, call centre gut feeling, and agency reports built to flatter
+        their own channel. Built UTM tagging and two Looker Studio dashboards
+        to replace opinion with a real, comparable picture.
+      </p>
+
+      <ul>
+        <li><strong>Proved budget was cannibalising organic search</strong> — cut paid spend with confidence and watched organic pick up the difference.</li>
+        <li><strong>Right-sized effort across channels</strong> — organic and paid made up the largest share of results despite disproportionate internal focus on email and SMS.</li>
+        <li><strong>Culled a resource-intensive SMS campaign</strong> costing real weekly budget and staff time for roughly one conversion a month.</li>
+        <li><strong>Turned “this campaign did nothing" disputes into data-backed conversations</strong>, campaign by campaign.</li>
+      </ul>
+
+      <div class="diff">
+        <span class="label">honest limitation · utm tracking</span>
+        <div class="minus">browser privacy changes and tracking prevention can strip or block utm parameters</div>
+        <div class="plus">treated as a strong directional signal, not a perfectly complete count — and said so, rather than overstating precision</div>
+      </div>
+
+      <div class="tools-row"><span class="key">tools →</span> GA4 · Google Tag Manager · Looker Studio · UTM parameters</div>
+    </section>
+
+    <!-- CASE STUDY 3: SEGMENTATION / JOURNEY -->
+    <section class="case">
+      <div class="case-num">case study 03 / 03</div>
+      <div class="meta-block">
+        <div class="row"><span class="key">role</span>&nbsp;&nbsp;lifecycle segmentation</div>
+        <div class="row"><span class="key">stack</span>&nbsp;dynamics · email · sms · loyalty data</div>
+        <div class="row"><span class="key">result</span>&nbsp;automated + cheaper, same outcome</div>
+      </div>
+
+      <h2>Testing whether the discount actually mattered</h2>
+      <p class="lede">
+        A manual monthly win-back call list worked well but ate real time from
+        both marketing and the call centre. Automated it into a segmented,
+        multi-channel journey — then used the automation to test an assumption
+        nobody had questioned: did the discount actually need to be that big?
+      </p>
+
+      <ul>
+        <li><strong>Automated a manual monthly process</strong>, sequencing email → SMS → call so the call centre only worked the harder remaining cases.</li>
+        <li><strong>Roughly doubled SMS click-through</strong> among high-loyalty clients by segmenting the send instead of treating the list as one audience.</li>
+        <li><strong>Cut the reactivation discount substantially</strong> across two rounds of testing, with only a marginal effect on conversion.</li>
+        <li><strong>Reduced call centre volume</strong> by routing easier conversions through cheaper, automated channels first.</li>
+      </ul>
+
+      <div class="note">
+        <span class="label">measurement — an honest note</span>
+        Attribution here was genuinely messy: dashboard data, manually-pulled
+        CRM segments, and self-reported call outcomes never fully reconciled.
+        As the journey improved and the call list got shorter, call centre
+        motivation to finish it quietly dropped too — a good problem, but one
+        that still muddies a clean before/after read.
+      </div>
+
+      <div class="tools-row"><span class="key">tools →</span> Microsoft Dynamics · Email · SMS · Looker Studio</div>
+    </section>
+
+  </div>
+</main>
+
+<<footer>
+  <div class="wrap">
+    <h2>Currently available</h2>
+    <p>
+      Open to part-time and contract CRM, email, and analytics work —
+      whole projects or ongoing overflow capacity.
+    </p>
+    <a class="contact-btn" href="#" id="contact-link" data-u="hello" data-d="minimalsites.com.au">Get in touch</a>
+    <div class="colophon">Andrea Y · Brisbane</div>
+  </div>
+</footer>
+ 
+<script>
+  // Email address is split into two data attributes above rather than
+  // written as a plain mailto: string, so basic scrapers that scan raw
+  // HTML text for email patterns won't pick it up. It's only assembled
+  // into a real mailto link at the moment someone clicks.
+  (function(){
+    var link = document.getElementById('contact-link');
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      window.location.href = 'mailto:' + link.dataset.u + '@' + link.dataset.d;
+    });
+  })();
+</script>
+</body>
+</html>
