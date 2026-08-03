@@ -253,81 +253,83 @@
   }
 
   .shots{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
     margin:26px 0;
   }
-  .shots figure{
-    margin:0;
+  .shot-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 16px;
     border:1px solid var(--line);
-    border-radius:var(--radius);
-    overflow:hidden;
+    border-radius:999px;
     background:var(--paper-raised);
-    display:flex;
-    flex-direction:column;
+    color:var(--teal);
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
   }
-  .shots img{
+  .shot-link:hover, .shot-link:focus-visible{
+    background:var(--teal-soft);
+    border-color:var(--teal);
+  }
+  .shot-link .icon{flex-shrink:0; color:var(--teal);}
+
+  /* ---------- Screenshot modal ---------- */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(18,23,43,0.72);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 0.2s ease;
+    z-index:100;
+  }
+  .modal-overlay.is-open{
+    opacity:1;
+    visibility:visible;
+  }
+  .modal-box{
+    position:relative;
+    max-width:min(720px, 100%);
+    max-height:85vh;
+    background:var(--paper-raised);
+    border-radius:var(--radius);
+    overflow:auto;
+    box-shadow:0 20px 60px rgba(18,23,43,0.35);
+  }
+  .modal-box img{
     display:block;
     width:100%;
     height:auto;
   }
-  .shot-reveal{
-    position:relative;
-    display:flex;
-    flex:1;
-    width:100%;
-    padding:0;
-    margin:0;
-    border:none;
-    background:var(--paper-raised);
-    cursor:pointer;
-    text-align:left;
-  }
-  .shot-reveal img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    filter:blur(18px);
-    transform:scale(1.03);
-    transition:filter 0.25s ease, transform 0.25s ease;
-  }
-  .shot-reveal .reveal-label{
+  .modal-close{
     position:absolute;
-    inset:0;
+    top:10px;
+    right:10px;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:none;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'JetBrains Mono', monospace;
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(18,23,43,0.4);
-    color:#F3F5F1;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-    transition:opacity 0.2s ease;
   }
-  .shot-reveal.is-revealed img{
-    filter:none;
-    transform:none;
-  }
-  .shot-reveal.is-revealed .reveal-label{
-    opacity:0;
-    pointer-events:none;
-  }
-  .shot-reveal:hover .reveal-label,
-  .shot-reveal:focus-visible .reveal-label{
-    background:rgba(18,23,43,0.55);
-  }
-  .shots figcaption{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    color:var(--ink-soft);
-    padding:8px 12px;
-    border-top:1px solid var(--line);
-    margin-top:auto;
-  }
+  .modal-close:hover{background:var(--teal);}
   @media (max-width:560px){
-    .shots{grid-template-columns:1fr;}
     .case{padding:32px 22px;}
   }
 
@@ -392,6 +394,14 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="icon-image" viewBox="0 0 20 20">
+    <rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/>
+    <circle cx="7" cy="8" r="1.5" fill="currentColor"/>
+    <path d="M2 14l5-5 4 4 3-3 4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">available · part-time / contract</div>
@@ -451,20 +461,21 @@
       </div>
 
       <div class="shots">
-        <figure>
-          <button class="shot-reveal" type="button" aria-label="Click to view screenshot: before, image-only email template">
-            <img src="/image-only-example.png" alt="Before: image-only email template" loading="lazy">
-            <span class="reveal-label">click to view</span>
-          </button>
-          <figcaption>before — image-only</figcaption>
-        </figure>
-        <figure>
-          <button class="shot-reveal" type="button" aria-label="Click to view screenshot: after, MJML-coded email template">
-            <img src="/custom-html-example.png" alt="After: MJML-coded email template" loading="lazy">
-            <span class="reveal-label">click to view</span>
-          </button>
-          <figcaption>after — mjml-coded</figcaption>
-        </figure>
+        <button class="shot-link" type="button" data-img="/custom-html-example.png" data-alt="Intended render: MJML-coded email template">
+          <svg class="icon" width="14" height="14"><use href="#icon-image"/></svg> Custom HTML — Intended Render
+        </button>
+        <button class="shot-link" type="button" data-img="/gmail.png" data-alt="Gmail Firefox rendering of the MJML-coded email template">
+          <svg class="icon" width="14" height="14"><use href="#icon-image"/></svg> Gmail Firefox
+        </button>
+        <button class="shot-link" type="button" data-img="/outlook.png" data-alt="Microsoft Outlook 2016 rendering of the MJML-coded email template">
+          <svg class="icon" width="14" height="14"><use href="#icon-image"/></svg> Microsoft Outlook 2016
+        </button>
+        <button class="shot-link" type="button" data-img="/outlook-dark.png" data-alt="Microsoft Outlook 2019 Dark rendering of the MJML-coded email template">
+          <svg class="icon" width="14" height="14"><use href="#icon-image"/></svg> Microsoft Outlook 2019 Dark
+        </button>
+        <button class="shot-link" type="button" data-img="/apple-mail.png" data-alt="Apple Mail Light rendering of the MJML-coded email template">
+          <svg class="icon" width="14" height="14"><use href="#icon-image"/></svg> Apple Mail Light
+        </button>
       </div>
 
       <div class="tools-row"><span class="key">tools <span class="arrow">→</span></span> MJML · Beefree · Microsoft Dynamics · HTML/CSS email</div>
@@ -555,6 +566,13 @@
   </div>
 </footer>
 
+<div class="modal-overlay" id="screenshot-modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close-btn" aria-label="Close">✕</button>
+    <img id="modal-img" src="" alt="">
+  </div>
+</div>
+
 <script>
   // Email address is split into two data attributes above rather than
   // written as a plain mailto: string, so basic scrapers that scan raw
@@ -584,14 +602,41 @@
     });
   })();
 
-  // Screenshots start blurred for privacy and only unblur once someone
-  // deliberately clicks (or activates via keyboard) to view them.
+  // Screenshots stay off the page by default (just a small link) and only
+  // open in a modal when someone deliberately clicks to view them.
   (function(){
-    var buttons = document.querySelectorAll('.shot-reveal');
-    buttons.forEach(function(btn){
+    var modal = document.getElementById('screenshot-modal');
+    var modalImg = document.getElementById('modal-img');
+    var closeBtn = document.getElementById('modal-close-btn');
+    var triggers = document.querySelectorAll('.shot-link');
+    var lastFocused = null;
+
+    function openModal(src, alt){
+      lastFocused = document.activeElement;
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modal.classList.add('is-open');
+      closeBtn.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modalImg.src = '';
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocused) lastFocused.focus();
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeModal();
+    }
+
+    triggers.forEach(function(btn){
       btn.addEventListener('click', function(){
-        btn.classList.toggle('is-revealed');
+        openModal(btn.dataset.img, btn.dataset.alt);
       });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){
+      if (e.target === modal) closeModal();
     });
   })();
 </script>
