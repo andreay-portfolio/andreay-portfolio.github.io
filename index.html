@@ -272,6 +272,48 @@
     width:100%;
     height:auto;
   }
+  .shot-reveal{
+    position:relative;
+    display:block;
+    width:100%;
+    padding:0;
+    margin:0;
+    border:none;
+    background:none;
+    cursor:pointer;
+    text-align:left;
+  }
+  .shot-reveal img{
+    filter:blur(18px);
+    transform:scale(1.03);
+    transition:filter 0.25s ease, transform 0.25s ease;
+  }
+  .shot-reveal .reveal-label{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(18,23,43,0.4);
+    color:#F3F5F1;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    transition:opacity 0.2s ease;
+  }
+  .shot-reveal.is-revealed img{
+    filter:none;
+    transform:none;
+  }
+  .shot-reveal.is-revealed .reveal-label{
+    opacity:0;
+    pointer-events:none;
+  }
+  .shot-reveal:hover .reveal-label,
+  .shot-reveal:focus-visible .reveal-label{
+    background:rgba(18,23,43,0.55);
+  }
   .shots figcaption{
     font-family:'JetBrains Mono', monospace;
     font-size:11.5px;
@@ -393,11 +435,17 @@
 
       <div class="shots">
         <figure>
-          <img src="/image-only-example.png" alt="Before: image-only email template" loading="lazy">
+          <button class="shot-reveal" type="button" aria-label="Click to view screenshot: before, image-only email template">
+            <img src="/image-only-example.png" alt="Before: image-only email template" loading="lazy">
+            <span class="reveal-label">click to view</span>
+          </button>
           <figcaption>before — image-only</figcaption>
         </figure>
         <figure>
-          <img src="/custom-html-example.png" alt="After: MJML-coded email template" loading="lazy">
+          <button class="shot-reveal" type="button" aria-label="Click to view screenshot: after, MJML-coded email template">
+            <img src="/custom-html-example.png" alt="After: MJML-coded email template" loading="lazy">
+            <span class="reveal-label">click to view</span>
+          </button>
           <figcaption>after — mjml-coded</figcaption>
         </figure>
       </div>
@@ -500,6 +548,17 @@
     link.addEventListener('click', function(e){
       e.preventDefault();
       window.location.href = 'mailto:' + link.dataset.u + '@' + link.dataset.d;
+    });
+  })();
+
+  // Screenshots start blurred for privacy and only unblur once someone
+  // deliberately clicks (or activates via keyboard) to view them.
+  (function(){
+    var buttons = document.querySelectorAll('.shot-reveal');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btn.classList.toggle('is-revealed');
+      });
     });
   })();
 </script>
