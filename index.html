@@ -83,6 +83,9 @@
     gap:8px;
     margin-bottom:22px;
   }
+  .hero .eyebrow{
+    color:var(--status-color, var(--teal));
+  }
   .eyebrow::before{
     content:"";
     width:7px;
@@ -91,6 +94,19 @@
     background:var(--teal);
     display:inline-block;
   }
+  .hero .eyebrow::before{
+    background:var(--status-color, var(--teal));
+  }
+  .status-text{ display:none; }
+  /* --- AVAILABILITY SWITCH ---
+     Controlled entirely by the data-availability attribute on <body>.
+     Set it to "available" or "unavailable" — nothing else needs editing. */
+  [data-availability="available"] { --status-color: var(--teal); }
+  [data-availability="unavailable"] { --status-color: var(--amber); }
+  [data-availability="available"] .eyebrow .status-available{ display:inline; }
+  [data-availability="unavailable"] .eyebrow .status-unavailable{ display:inline; }
+  [data-availability="available"] footer .status-available{ display:block; }
+  [data-availability="unavailable"] footer .status-unavailable{ display:block; }
   h1.hero-title{
     font-size:clamp(30px, 4.4vw, 44px);
     max-width:14ch;
@@ -396,7 +412,7 @@
   }
 </style>
 </head>
-<body>
+<body data-availability="unavailable">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="icon-image" viewBox="0 0 20 20">
@@ -408,7 +424,10 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">available · part-time / contract</div>
+    <div class="eyebrow">
+      <span class="status-text status-available">available · part-time / contract</span>
+      <span class="status-text status-unavailable">currently at capacity · not taking new work</span>
+    </div>
     <h1 class="hero-title">Most marketing wins are guesses. I build the systems that prove which ones are real.</h1>
     <p class="hero-sub">
       Andrea Y — CRM, lifecycle email, and marketing analytics. I design the
@@ -560,10 +579,16 @@
 
 <footer>
   <div class="wrap">
-    <h2>Currently available</h2>
-    <p>
+    <h2 class="status-text status-available">Currently available</h2>
+    <p class="status-text status-available">
       Open to part-time and contract CRM, email, and analytics work —
       whole projects or ongoing overflow capacity.
+    </p>
+    <h2 class="status-text status-unavailable">Not taking on new work right now</h2>
+    <p class="status-text status-unavailable">
+      Currently at capacity, but always happy to hear about future
+      opportunities — feel free to reach out and I'll follow up when
+      availability opens back up.
     </p>
     <a class="contact-btn" href="#" id="contact-link" data-u="andrea.yunusova" data-d="proton.me">Get in touch</a>
     <div class="colophon">Andrea Y · Brisbane</div>
